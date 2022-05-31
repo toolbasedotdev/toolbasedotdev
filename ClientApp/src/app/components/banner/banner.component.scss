@@ -1,0 +1,51 @@
+$width: 768px;
+
+:host {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background-color: var(--color-banner-bg);
+
+    canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+    }
+
+    .center {
+        display: inline-block;
+        position: relative;
+        top: 115px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: $width;
+
+        h1 {
+            color: var(--color-banner-title);
+            font-size: 68px;
+            text-shadow: 0 4px var(--color-banner-title-shadow);
+            text-align: center;
+            margin-bottom: 36px;
+
+            span {
+                font-style: italic;
+                color: var(--color-banner-bg);
+                opacity: 0.6;
+                text-shadow: -1px -0 0 var(--color-banner-title),
+                    0 -1px 0 var(--color-banner-title),
+                    1px 0 0 var(--color-banner-title),
+                    0 1px 0 var(--color-banner-title);
+            }
+        }
+
+        p {
+            color: var(--color-banner-title);
+            font-size: 18px;
+            text-align: center;
+            margin-top: 28px;
+        }
+    }
+}

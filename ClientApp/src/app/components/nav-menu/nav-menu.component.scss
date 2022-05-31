@@ -1,0 +1,37 @@
+.veil {
+    z-index: 100;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent !important;
+}
+
+menu {
+    z-index: 100;
+    position: absolute;
+    display: inline-block;
+    background-color: var(--color-nav--menu-bg);
+    width: 175px;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    border-radius: 6px;
+    box-shadow: 0 3px 7px var(--color-nav--menu-shadow);
+
+    &[hidden] {
+        display: none;
+    }
+
+    .arrow-up {
+        $size: 8px;
+        position: absolute;
+        top: -$size;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        border-bottom: $size solid var(--color-nav--menu-bg);
+    }
+}

@@ -1,0 +1,29 @@
+$height: 64px;
+
+:host {
+    display: inline-flex;
+    width: 100%;
+    height: $height;
+    box-sizing: border-box;
+    padding: 0 12px;
+    border-radius: calc($height / 2);
+    background-color: var(--color-banner--searchbar-bg);
+
+    .icon {
+        color: var(--color-banner--searchbar-icon);
+        height: $height;
+        line-height: $height;
+    }
+
+    input {
+        font-size: 22px;
+        color: var(--color-banner--searchbar-icon);
+        height: $height;
+        line-height: $height;
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+        padding: 0 12px;
+        flex: 1;
+    }
+}

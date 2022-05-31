@@ -1,0 +1,32 @@
+<app-nav-menu #accountMenu>
+    <li>Your account</li>
+    <li>Settings</li>
+    <div role="separator"></div>
+    <li (click)="signOutGithub()">Sign out</li>
+</app-nav-menu>
+
+<nav>
+    <div class="fill"></div>
+
+    <div
+        #accountMenuButton
+        class="link"
+        role="link"
+        *ngIf="account.isSignedIn(); else signIn"
+        (click)="showAccountMenu()"
+    >
+        <img
+            class="avatar"
+            alt="Your Github Avatar"
+            [src]="github.getAvatarUrl(account.getOwnName())"
+        />
+        <span>{{ account.getOwnName() }}</span>
+    </div>
+
+    <ng-template #signIn>
+        <div class="link" role="link" (click)="signInGithub()">
+            <span>Sign in with Github</span>
+            <fa-icon [icon]="faGithub" class="icon"></fa-icon>
+        </div>
+    </ng-template>
+</nav>

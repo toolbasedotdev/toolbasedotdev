@@ -1,0 +1,15 @@
+<div class="veil" *ngIf="visible" (click)="hide()"></div>
+
+<menu
+    #menu
+    [hidden]="!visible"
+    [style.top.px]="top"
+    [style.left.px]="left + offsetX"
+    [style.visibility]="ready ? 'visible' : 'hidden'"
+>
+    <div
+        class="arrow-up"
+        [style.transform]="'translateX(calc(-1*' + offsetX + 'px))'"
+    ></div>
+    <ng-content></ng-content>
+</menu>
