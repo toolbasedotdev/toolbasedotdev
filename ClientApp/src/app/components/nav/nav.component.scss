@@ -1,34 +1,5 @@
 $height: 60px;
 
-app-nav-menu {
-    // TODO: This should probably be in its own component.
-    li {
-        cursor: pointer;
-        display: block;
-        height: 32px;
-        line-height: 32px;
-        padding: 0 16px;
-        box-sizing: border-box;
-        user-select: none;
-
-        &:hover {
-            background-color: var(--color-nav--menu-item-bg-hover);
-        }
-
-        &:active {
-            background-color: var(--color-nav--menu-item-bg-active);
-        }
-    }
-
-    div[role="separator"] {
-        display: block;
-        width: 100%;
-        height: 1px;
-        margin: 10px 0;
-        background-color: var(--color-nav--menu-div);
-    }
-}
-
 nav {
     display: flex;
     flex-flow: row nowrap;

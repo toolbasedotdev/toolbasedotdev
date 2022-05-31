@@ -1,0 +1,21 @@
+:host {
+    cursor: pointer;
+    display: block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    user-select: none;
+
+    &.WIP {
+        text-decoration: line-through;
+    }
+
+    &:hover {
+        background-color: var(--color-nav--menu-item-bg-hover);
+    }
+
+    &:active {
+        background-color: var(--color-nav--menu-item-bg-active);
+    }
+}

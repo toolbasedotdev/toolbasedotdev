@@ -40,7 +40,7 @@ export class NavMenuComponent {
 
     /**
      * Displays the menu
-     * @param centerUnder Element to center menu under
+     * @param centerUnder - Element to center menu under
      */
     show(centerUnder: HTMLElement) {
         // Store centerUnder for responding to mouse events
@@ -87,8 +87,8 @@ export class NavMenuComponent {
     /**
      * Determines if menu should be closed
      * when cursor is moved
-     * @param curX Cursor X
-     * @param curY Cursor Y
+     * @param curY - Cursor Y
+     * @param curX - Cursor X
      */
     @HostListener("window:mousemove", ["$event.pageX", "$event.pageY"])
     onMouseMove(curX: number, curY: number): void {
