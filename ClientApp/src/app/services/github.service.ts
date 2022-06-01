@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { graphql } from "@octokit/graphql/dist-types/types";
 import { Octokit } from "octokit";
-import { take } from "rxjs/operators";
 import { GithubAccessDetails } from "../models/github-access-details";
 
 const noAuthMsg = "No Github authentication";
@@ -54,9 +53,9 @@ export class GithubService implements OnInit {
         if (!this._graphql) throw Error(noAuthMsg);
 
         return this._graphql(
-            `query($login:String!) {
-                user(login:$login) {
-                  repositories(first:10, privacy: PUBLIC) {
+            `query($login: String!) {
+                user(login: $login) {
+                  repositories(first: 10, privacy: PUBLIC) {
                     nodes {
                       id,
                       name
