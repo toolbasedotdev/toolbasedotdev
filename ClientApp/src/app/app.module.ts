@@ -17,8 +17,8 @@ import { NavMenuComponent } from "./components/nav-menu/nav-menu.component";
 // Services
 import { GithubService } from "./services/github.service";
 import { AccountService } from "./services/account.service";
-import { NavMenuItemComponent } from './components/nav-menu-item/nav-menu-item.component';
-import { NavMenuSeparatorComponent } from './components/nav-menu-separator/nav-menu-separator.component';
+import { NavMenuItemComponent } from "./components/nav-menu-item/nav-menu-item.component";
+import { NavMenuSeparatorComponent } from "./components/nav-menu-separator/nav-menu-separator.component";
 
 @NgModule({
     declarations: [

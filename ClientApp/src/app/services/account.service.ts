@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { take } from "rxjs/operators";
-// import { toPromise } "rxjs";
 import { UserDetails } from "../models/user-details";
 
 @Injectable({
