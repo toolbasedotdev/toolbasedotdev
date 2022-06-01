@@ -1,15 +1,23 @@
-h1 {
-    color: var(--color-banner-title);
-    text-shadow: 0 4px var(--color-banner-title-shadow);
-    text-align: center;
-    margin-bottom: 36px;
+:host {
+    &.clickable {
+        cursor: pointer;
+    }
 
-    span {
-        font-style: italic;
-        color: var(--color-banner-bg);
-        opacity: 0.6;
-        text-shadow: -1px -0 0 var(--color-banner-title),
-            0 -1px 0 var(--color-banner-title),
-            1px 0 0 var(--color-banner-title), 0 1px 0 var(--color-banner-title);
+    h1 {
+        color: var(--color-banner-title);
+        text-shadow: 0 4px var(--color-banner-title-shadow);
+        text-align: center;
+        margin-bottom: 36px;
+        user-select: none;
+
+        span {
+            font-style: italic;
+            color: var(--color-banner-bg);
+            opacity: 0.6;
+            text-shadow: -1px -0 0 var(--color-banner-title),
+                0 -1px 0 var(--color-banner-title),
+                1px 0 0 var(--color-banner-title),
+                0 1px 0 var(--color-banner-title);
+        }
     }
 }
