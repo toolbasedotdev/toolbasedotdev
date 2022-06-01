@@ -8,6 +8,11 @@ nav {
     box-sizing: border-box;
     background-color: var(--color-nav-bg);
     font-size: 0;
+    padding-left: 16px;
+
+    app-logo {
+        line-height: $height;
+    }
 
     .fill {
         flex: 1;
