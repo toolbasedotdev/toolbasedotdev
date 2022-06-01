@@ -1,10 +1,6 @@
 <app-nav-menu #accountMenu>
-    <!-- <li class="WIP">Your account</li>
-    <li class="WIP">Settings</li>
-    <div role="separator"></div>
-    <li (click)="signOutGithub()">Sign out</li> -->
-    <app-nav-menu-item>Your account</app-nav-menu-item>
-    <app-nav-menu-item>Settings</app-nav-menu-item>
+    <app-nav-menu-item [wip]="true">Your account</app-nav-menu-item>
+    <app-nav-menu-item [wip]="true">Settings</app-nav-menu-item>
     <app-nav-menu-separator></app-nav-menu-separator>
     <app-nav-menu-item [routerLink]="['signout']"> Sign out </app-nav-menu-item>
 </app-nav-menu>

@@ -1,4 +1,4 @@
-import { Component, HostBinding } from "@angular/core";
+import { Component, HostBinding, Input } from "@angular/core";
 
 @Component({
     selector: "app-nav-menu-item",
@@ -8,4 +8,8 @@ import { Component, HostBinding } from "@angular/core";
 export class NavMenuItemComponent {
     @HostBinding("attr.role")
     public role = "listitem";
+
+    @Input("wip")
+    @HostBinding("class.WIP")
+    public wip = false;
 }
