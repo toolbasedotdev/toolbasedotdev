@@ -23,10 +23,6 @@ export class NavComponent {
         this.account.signIn();
     }
 
-    signOutGithub(): void {
-        this.account.signOut();
-    }
-
     showAccountMenu(): void {
         const centerUnder = this?.accountMenuButton?.nativeElement;
         if (centerUnder) this.accountMenu.show(centerUnder);
