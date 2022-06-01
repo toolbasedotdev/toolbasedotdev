@@ -4,17 +4,15 @@ import {
     ElementRef,
     HostListener,
     OnDestroy,
-    ViewChild
+    ViewChild,
 } from "@angular/core";
 
 @Component({
     selector: "app-banner",
     templateUrl: "./banner.component.html",
-    styleUrls: ["./banner.component.scss"]
+    styleUrls: ["./banner.component.scss"],
 })
 export class BannerComponent implements AfterViewInit, OnDestroy {
-    constructor() {}
-
     @ViewChild("canvas", { static: true })
     private canvasRef!: ElementRef<HTMLCanvasElement>;
 
@@ -24,8 +22,8 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
 
     private context2D: CanvasRenderingContext2D | null = null;
 
-    private canvasWidth: number = 0;
-    private canvasHeight: number = 0;
+    private canvasWidth = 0;
+    private canvasHeight = 0;
 
     private animationCancelToken: number | undefined;
 
@@ -33,7 +31,7 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
         if (!this.canvas) return;
 
         this.setupCanvas();
-        requestAnimationFrame(time => this.renderCanvas(time));
+        requestAnimationFrame((time) => this.renderCanvas(time));
     }
 
     ngOnDestroy(): void {
@@ -55,7 +53,7 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
             preserveDrawingBuffer: true,
             antialias: false,
             failIfMajorPerformanceCaveat: true,
-            powerPreference: "low-power"
+            powerPreference: "low-power",
         }) as CanvasRenderingContext2D;
 
         if (!ctx) throw Error("Could not create canvas context");
@@ -104,7 +102,7 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
             ctx.stroke();
         }
 
-        return requestAnimationFrame(time => {
+        return requestAnimationFrame((time) => {
             this.renderCanvas(time);
         });
     }
