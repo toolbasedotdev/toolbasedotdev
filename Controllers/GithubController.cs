@@ -7,7 +7,7 @@ using toolbasedotdev.Models;
 namespace toolbasedotdev.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class GithubController : ControllerBase
 {
     [HttpGet]

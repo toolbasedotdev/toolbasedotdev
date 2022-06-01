@@ -6,7 +6,7 @@ using toolbasedotdev.Models;
 namespace toolbasedotdev.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class AccountController : ControllerBase
 {
     [HttpGet]

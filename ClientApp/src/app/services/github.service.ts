@@ -31,7 +31,7 @@ export class GithubService implements OnInit {
 
     async syncAccessToken(): Promise<void> {
         this._access = await this.http
-            .get<GithubAccessDetails>("/github/access")
+            .get<GithubAccessDetails>("/api/github/access")
             .toPromise();
 
         this._graphql = this._octokit.graphql.defaults({

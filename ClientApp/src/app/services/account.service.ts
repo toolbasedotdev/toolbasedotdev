@@ -14,17 +14,17 @@ export class AccountService {
 
     async syncLocalUser(): Promise<void> {
         this.localUser = await this.http
-            .get<UserDetails>("/account/whoami")
+            .get<UserDetails>("/api/account/whoami")
             .toPromise();
     }
 
     signIn(): void {
-        location.href = "/github/signin";
+        location.href = "api/github/signin";
     }
 
     signOut(): void {
         this.http
-            .get("/account/signout")
+            .get("/api/account/signout")
             .pipe(take(1))
             .subscribe(() => (location.href = ""));
     }
