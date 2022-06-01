@@ -1,0 +1,17 @@
+:host {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 100%;
+
+    h1 {
+        font-size: 275px;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 150px;
+    }
+}

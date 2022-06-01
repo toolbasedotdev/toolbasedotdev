@@ -19,6 +19,7 @@ import { GithubService } from "./services/github.service";
 import { AccountService } from "./services/account.service";
 import { NavMenuItemComponent } from "./components/nav-menu-item/nav-menu-item.component";
 import { NavMenuSeparatorComponent } from "./components/nav-menu-separator/nav-menu-separator.component";
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { NavMenuSeparatorComponent } from "./components/nav-menu-separator/nav-m
         NavMenuComponent,
         NavMenuItemComponent,
         NavMenuSeparatorComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         BrowserModule,
