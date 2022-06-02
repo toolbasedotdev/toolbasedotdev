@@ -1,0 +1,7 @@
+{
+  "$schema": "./stylecop.schema.json",
+  "settings": {
+    "documentationRules": {
+    }
+  }
+}

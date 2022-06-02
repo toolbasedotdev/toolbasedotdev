@@ -1,4 +1,4 @@
-namespace toolbasedotdev.Models;
+namespace ToolBaseDotDev.Models;
 
 public struct GithubAccessDetails
 {

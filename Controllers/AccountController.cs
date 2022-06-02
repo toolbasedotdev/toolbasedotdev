@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿namespace ToolBaseDotDev.Controllers;
+
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using toolbasedotdev.Models;
-
-namespace toolbasedotdev.Controllers;
+using ToolBaseDotDev.Models;
 
 [ApiController]
 [Route("api/[controller]")]
