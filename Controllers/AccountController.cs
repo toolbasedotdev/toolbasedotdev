@@ -5,26 +5,40 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToolBaseDotDev.Models;
 
+/// <summary>
+/// Controls actions related to accounts.
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class AccountController : ControllerBase
 {
+    /// <summary>
+    /// Used by client to obtain local user details.
+    /// </summary>
+    /// <returns>
+    /// The caller's own <see cref="UserDetails" />.
+    /// </returns>
     [HttpGet]
     [Route("whoami")]
     public ActionResult<UserDetails> WhoAmI()
     {
-        if (User?.Identity?.Name == null)
-            return Ok(UserDetails.UserNotFound());
+        if (this.User?.Identity?.Name == null)
+        {
+            return this.Ok(UserDetails.UserNotFound());
+        }
 
-        return Ok(new UserDetails { Name = User.Identity.Name });
+        return this.Ok(new UserDetails { Name = this.User.Identity.Name });
     }
 
+    /// <summary>
+    /// Signs out the caller.
+    /// </summary>
     [HttpGet]
     [Route("signout")]
     [Authorize]
-    public async Task<IActionResult> ManualSignOut()
+    public IActionResult ManualSignOut()
     {
-        await HttpContext.SignOutAsync();
-        return Ok();
+        _ = this.HttpContext.SignOutAsync();
+        return this.Ok();
     }
 }
