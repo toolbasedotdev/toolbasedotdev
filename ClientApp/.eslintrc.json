@@ -6,7 +6,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:jsdoc/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -16,9 +17,22 @@
     "plugins": [
         "@typescript-eslint",
         "@typescript-eslint/eslint-plugin",
-        "eslint-plugin-tsdoc"
+        "jsdoc"
     ],
+    "settings": {
+        "jsdoc": {
+            "mode": "typescript"
+        }
+    },
     "rules": {
-        "tsdoc/syntax": "error"
+        "jsdoc/require-jsdoc": ["warn", {
+            "require": {
+                "FunctionDeclaration": true,
+                "MethodDefinition": true,
+                "ClassDeclaration": true,
+                "ArrowFunctionExpression": true,
+                "FunctionExpression": true
+            }
+        }]
     }
 }
