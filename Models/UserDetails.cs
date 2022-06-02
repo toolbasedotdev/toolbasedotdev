@@ -1,8 +1,7 @@
 namespace ToolBaseDotDev.Models;
 
 /// <summary>
-/// Details relevant to displaying a user.
-/// Does not include user data.
+/// Details relevant to displaying a user. Does not include user data.
 /// </summary>
 public class UserDetails
 {

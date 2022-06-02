@@ -7,42 +7,79 @@ import {
     ViewChild,
 } from "@angular/core";
 
+/**
+ * First focal point on the home page. Renders a decorative slow-moving grid.
+ * Contains the app's main search bar.
+ */
 @Component({
     selector: "app-banner",
     templateUrl: "./banner.component.html",
     styleUrls: ["./banner.component.scss"],
 })
 export class BannerComponent implements AfterViewInit, OnDestroy {
-    @ViewChild("canvas", { static: true })
+    /**
+     * Reference to canvas element in template.
+     */
+    @ViewChild("canvas", {
+        static: true,
+    })
     private canvasRef!: ElementRef<HTMLCanvasElement>;
 
+    /**
+     * Canvas to render the grid to.
+     */
     private get canvas(): HTMLCanvasElement | undefined {
         return this?.canvasRef?.nativeElement;
     }
 
+    /**
+     * Canvas's 2D rendering context.
+     */
     private context2D: CanvasRenderingContext2D | null = null;
 
+    /**
+     * Keeps track of canvas width so we don't need to calculate it each frame.
+     */
     private canvasWidth = 0;
+
+    /**
+     * Keeps track of canvas height so we don't need to calculate it each frame.
+     */
     private canvasHeight = 0;
 
+    /**
+     * Use to cancel the requestAnimationFrame loop when the component is
+     * destroyed.
+     */
     private animationCancelToken: number | undefined;
 
-    ngAfterViewInit(): void {
+    /**
+     * After view init, sets up the canvas for high DPI rendering, then begins
+     * the requestAnimationFrame loop.
+     */
+    public ngAfterViewInit(): void {
         if (!this.canvas) return;
 
         this.setupCanvas();
         requestAnimationFrame((time) => this.renderCanvas(time));
     }
 
-    ngOnDestroy(): void {
+    /**
+     * On destroy, cancels the requestAnimationFrame loop.
+     */
+    public ngOnDestroy(): void {
         if (!this.animationCancelToken) return;
 
         cancelAnimationFrame(this.animationCancelToken);
     }
 
+    /**
+     * Sets up the canvas for high DPI rendering. This is also called on
+     * window resize, because the canvas scale will be incorrect if we don't.
+     */
     @HostListener("window:resize")
     private setupCanvas(): void {
-        if (!this.canvas) throw Error("asd");
+        if (!this.canvas) throw Error("No canvas");
 
         const dpr = window.devicePixelRatio || 1;
         const rect = this.canvas.getBoundingClientRect();
@@ -64,6 +101,9 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
         this.context2D = ctx;
     }
 
+    /**
+     * Renders the grid, then requests the next animation frame.
+     */
     private renderCanvas(time: number): number {
         if (!this.context2D) return 0;
 
@@ -72,7 +112,6 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
         const majorEvery = 4;
         const colorMinor = "rgb(40, 50, 40)";
         const colorMajor = "rgb(40, 75, 40)";
-
         const ctx = this.context2D;
         const w = this.canvasWidth;
         const h = this.canvasHeight;

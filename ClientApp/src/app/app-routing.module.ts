@@ -13,6 +13,9 @@ const routes: Routes = [
     { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
 
+/**
+ * Used to define the app's routing patterns
+ */
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],

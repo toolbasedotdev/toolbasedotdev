@@ -19,8 +19,8 @@ import { GithubService } from "./services/github.service";
 import { AccountService } from "./services/account.service";
 import { NavMenuItemComponent } from "./components/nav-menu-item/nav-menu-item.component";
 import { NavMenuSeparatorComponent } from "./components/nav-menu-separator/nav-menu-separator.component";
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { LogoComponent } from './components/logo/logo.component';
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { LogoComponent } from "./components/logo/logo.component";
 
 @NgModule({
     declarations: [
@@ -47,4 +47,5 @@ import { LogoComponent } from './components/logo/logo.component';
     providers: [AccountService, GithubService],
     bootstrap: [AppComponent],
 })
+// eslint-disable-next-line jsdoc/require-jsdoc
 export class AppModule {}

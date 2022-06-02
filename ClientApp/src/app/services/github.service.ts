@@ -6,17 +6,26 @@ import { GithubAccessDetails } from "../models/github-access-details";
 
 const noAuthMsg = "No Github authentication";
 
+/**
+ * Used for actions related to Github OAuth, and the Github GraphQL API.
+ */
 @Injectable({
     providedIn: "root",
 })
 export class GithubService implements OnInit {
-    constructor(private http: HttpClient) {}
+    /**
+     * Constructs the GithubService.
+     */
+    public constructor(private http: HttpClient) {}
 
     private _octokit = new Octokit();
     private _access: GithubAccessDetails | null = null;
     private _graphql: graphql | null = null;
 
-    ngOnInit(): void {
+    /**
+     * On init, configures Octokit hooks.
+     */
+    public ngOnInit(): void {
         this._octokit.hook.after("request", async (response, options) => {
             console.log(
                 `[Github API] ${options.method} ${options.url}: ${response.status}`
@@ -29,7 +38,10 @@ export class GithubService implements OnInit {
         });
     }
 
-    async syncAccessToken(): Promise<void> {
+    /**
+     * Fetches details required to authenticate with Github's GraphQL API.
+     */
+    public async syncAccessToken(): Promise<void> {
         this._access = await this.http
             .get<GithubAccessDetails>("/api/github/access")
             .toPromise();
@@ -41,15 +53,31 @@ export class GithubService implements OnInit {
         });
     }
 
-    getAvatarUrl(name: string): string {
-        return `https://github.com/${name}.png`;
+    /**
+     * Gets a user's Github avatar.
+     *
+     * @param username - Github username
+     * @returns Avatar URL
+     */
+    public getAvatarUrl(username: string): string {
+        return `https://github.com/${username}.png`;
     }
 
-    getUser(username: string) {
+    /**
+     * Queries Github's REST API for a user object
+     *
+     * @param username - Github username
+     */
+    public getUser(username: string) {
         return this._octokit.rest.users.getByUsername({ username });
     }
 
-    getUserRepoNames(username: string) {
+    /**
+     * Queries Github's GraphQL API for a list of a user's repos.
+     *
+     * @param username - Github username
+     */
+    public getUserRepoNames(username: string) {
         if (!this._graphql) throw Error(noAuthMsg);
 
         return this._graphql(
