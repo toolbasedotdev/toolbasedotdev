@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "Angular.ng-template",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "rvest.vs-code-prettier-eslint",
+        "ms-dotnettools.csharp",
+        "k--kato.docomment",
+        "csharpier.csharpier-vscode",
+        "aaron-bond.better-comments"
+    ]
+}
