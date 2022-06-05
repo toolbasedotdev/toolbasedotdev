@@ -13,6 +13,8 @@ cd ClientApp
 npm install
 ```
 
+Start the project using `dotnet run` then navigate to `https://localhost:7210`
+
 ### Plugins
 
 Code style is enforced with the following VSCode extensions and dev dependencies:
