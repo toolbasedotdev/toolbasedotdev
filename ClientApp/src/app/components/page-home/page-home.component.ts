@@ -8,12 +8,12 @@ import { AccountService } from "src/app/services/account.service";
  */
 @Component({
     selector: "app-home",
-    templateUrl: "./home.component.html",
-    styleUrls: ["./home.component.scss"],
+    templateUrl: "./page-home.component.html",
+    styleUrls: ["./page-home.component.scss"],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class PageHomeComponent implements OnInit, OnDestroy {
     /**
-     * Constructs the HomeComponent.
+     * Constructs the PageHomeComponent.
      */
     constructor(
         private route: ActivatedRoute,

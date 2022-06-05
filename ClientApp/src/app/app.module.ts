@@ -8,7 +8,7 @@ import { AppRoutingModule } from "./app-routing.module";
 
 // Components
 import { AppComponent } from "./app.component";
-import { HomeComponent } from "./components/home/home.component";
+import { PageHomeComponent } from "./components/page-home/page-home.component";
 import { BannerComponent } from "./components/banner/banner.component";
 import { BannerSearchbarComponent } from "./components/banner-searchbar/banner-searchbar.component";
 import { NavComponent } from "./components/nav/nav.component";
@@ -25,14 +25,15 @@ import { LogoComponent } from "./components/logo/logo.component";
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent,
+        PageHomeComponent,
+        PageNotFoundComponent,
+
         BannerComponent,
         BannerSearchbarComponent,
         NavComponent,
         NavMenuComponent,
         NavMenuItemComponent,
         NavMenuSeparatorComponent,
-        PageNotFoundComponent,
         LogoComponent,
     ],
     imports: [
