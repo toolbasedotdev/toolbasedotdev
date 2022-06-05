@@ -38,6 +38,18 @@ services
                 .CookieAuthenticationDefaults
                 .AuthenticationScheme
     )
+    .AddCookie(
+        Microsoft
+            .AspNetCore
+            .Authentication
+            .Cookies
+            .CookieAuthenticationDefaults
+            .AuthenticationScheme,
+        options =>
+        {
+            options.SlidingExpiration = true;
+        }
+    )
     .AddGitHub(
         "Github",
         options =>
