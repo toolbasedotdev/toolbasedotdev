@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { take } from "rxjs/operators";
-import { UserDetails } from "../models/user-details";
+import { UserDetails } from "./models/user-details";
 
 /**
  * Used for actions related to the local user's account.
@@ -13,8 +13,11 @@ export class AccountService {
     /**
      * Constructs the AccountService.
      */
-    public constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {}
 
+    /**
+     * The user that is currently logged in.
+     */
     public localUser: UserDetails = { notFound: true };
 
     /**

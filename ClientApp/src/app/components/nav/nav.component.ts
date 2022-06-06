@@ -9,8 +9,8 @@ import { NavigationEnd, Router } from "@angular/router";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { Subscription } from "rxjs";
 import { filter } from "rxjs/operators";
-import { AccountService } from "src/app/services/account.service";
-import { GithubService } from "src/app/services/github.service";
+import { AccountService } from "src/app/services/account/account.service";
+import { GithubService } from "src/app/services/github/github.service";
 import { NavMenuComponent } from "../nav-menu/nav-menu.component";
 
 /**

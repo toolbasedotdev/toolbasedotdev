@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
-import { AccountService } from "src/app/services/account.service";
+import { AccountService } from "src/app/services/account/account.service";
 
 /**
  * The app's homepage.

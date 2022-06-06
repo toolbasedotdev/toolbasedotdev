@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { AccountService } from "./services/account.service";
-import { GithubService } from "./services/github.service";
+import { AccountService } from "./services/account/account.service";
+import { GithubService } from "./services/github/github.service";
 
 /**
  * The app's main component.

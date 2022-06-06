@@ -15,8 +15,8 @@ import { NavComponent } from "./components/nav/nav.component";
 import { NavMenuComponent } from "./components/nav-menu/nav-menu.component";
 
 // Services
-import { GithubService } from "./services/github.service";
-import { AccountService } from "./services/account.service";
+import { GithubService } from "./services/github/github.service";
+import { AccountService } from "./services/account/account.service";
 import { NavMenuItemComponent } from "./components/nav-menu-item/nav-menu-item.component";
 import { NavMenuSeparatorComponent } from "./components/nav-menu-separator/nav-menu-separator.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
