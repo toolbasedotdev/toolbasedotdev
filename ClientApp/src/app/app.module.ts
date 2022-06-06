@@ -21,7 +21,7 @@ import { NavMenuItemComponent } from "./components/nav-menu-item/nav-menu-item.c
 import { NavMenuSeparatorComponent } from "./components/nav-menu-separator/nav-menu-separator.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { LogoComponent } from "./components/logo/logo.component";
-import { PageLinkToolComponent } from './components/page-link-tool/page-link-tool.component';
+import { PageLinkToolComponent } from "./components/page-link-tool/page-link-tool.component";
 
 @NgModule({
     declarations: [
