@@ -6,6 +6,11 @@ import { Octokit } from "octokit";
 import { TreeEntriesResponse } from "./models/tree-entries-response";
 import { TreeEntry } from "./models/tree-entry";
 import { GithubAccessDetails } from "./models/github-access-details";
+import { UserReposResponse } from "./models/user-repos-response";
+import { Repository } from "./models/repository";
+
+// * Use Github's GraphQL Explorer to build queries:
+// * https://docs.github.com/en/graphql/overview/explorer
 
 /**
  * Default message for authentication errors.
@@ -134,24 +139,36 @@ export class GithubService implements OnInit {
      *
      * @param owner - Github username
      */
-    public getUserRepoNames(owner: string) {
+    public async getUserRepoNames(owner: string) {
         if (!this._graphql) throw Error(ERR_NO_AUTH);
 
-        return this._graphql(
-            `query($login: String!) {
-                user(login: $login) {
-                    repositories(first: 10, privacy: PUBLIC) {
-                        nodes {
-                            id
-                            name
-                            default_branch
+        let result: Repository[] | null = null;
+
+        try {
+            const res: UserReposResponse = await this._graphql(
+                `query($login: String!) {
+                    user(login: $login) {
+                        repositories(first: 100, privacy: PUBLIC) {
+                            nodes {
+                                id
+                                name
+                            }
                         }
                     }
-                }
+                }`,
+                { login: owner }
+            );
+
+            if (res?.user?.repositories?.nodes) {
+                result = res.user.repositories.nodes;
             }
-            `,
-            { login: owner }
-        );
+        } catch (e) {
+            this._handleGraphqlError(e);
+        }
+
+        if (!result) throw Error(ERR_GRAPHQL);
+
+        return result;
     }
 
     /**
@@ -166,6 +183,8 @@ export class GithubService implements OnInit {
         fetchObjects: boolean
     ): Promise<TreeEntry[]> {
         if (!this._graphql) throw Error(ERR_NO_AUTH);
+
+        let result: TreeEntry[] | null = null;
 
         const objectsQuery = `
             object {
@@ -196,12 +215,14 @@ export class GithubService implements OnInit {
             );
 
             if (res?.node?.object?.entries) {
-                return res.node.object.entries;
+                result = res.node.object.entries;
             }
         } catch (e) {
             this._handleGraphqlError(e);
         }
 
-        throw Error(ERR_GRAPHQL);
+        if (!result) throw Error(ERR_GRAPHQL);
+
+        return result;
     }
 }
