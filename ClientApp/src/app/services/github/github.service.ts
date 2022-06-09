@@ -1,10 +1,21 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { graphql } from "@octokit/graphql/dist-types/types";
+import { GraphqlResponseError } from "@octokit/graphql";
 import { Octokit } from "octokit";
+import { TreeEntriesResponse } from "./models/tree-entries-response";
+import { TreeEntry } from "./models/tree-entry";
 import { GithubAccessDetails } from "./models/github-access-details";
 
-const noAuthMsg = "No Github authentication";
+/**
+ * Default message for authentication errors.
+ */
+const ERR_NO_AUTH = "No Github authentication";
+
+/**
+ * Default message for GraphQL errors.
+ */
+const ERR_GRAPHQL = "Github GraphQL API error";
 
 /**
  * Used for actions related to Github OAuth, and the Github GraphQL API.
@@ -21,17 +32,52 @@ export class GithubService implements OnInit {
     /**
      *
      */
-    private _octokit = new Octokit();
-
-    /**
-     *
-     */
     private _access: GithubAccessDetails | null = null;
 
     /**
-     *
+     * Octokit instance used for REST API. addAuthHeader must be used to add the
+     * authorization header.
+     */
+    private _octokit = new Octokit();
+
+    /**
+     * Octokit GraphQL instance used for GraphQL API. Automatically includes
+     * authorization header.
      */
     private _graphql: graphql | null = null;
+
+    /**
+     * Adds default headers to a Github API request.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    private _addAuthHeader(request: any): any {
+        if (this?._access?.accessToken) {
+            return {
+                ...request,
+                headers: {
+                    ...request.headers,
+                    authorization: `token ${this._access.accessToken}`,
+                },
+            };
+        }
+
+        return request;
+    }
+
+    /**
+     * Handles an error response from Github's GraphQL API.
+     */
+    private _handleGraphqlError(e: unknown): void {
+        let log = "[Github] GraphQL response error!";
+
+        if (e instanceof GraphqlResponseError) {
+            log += "\n" + JSON.stringify(e, null, 2);
+        }
+
+        console.error(log);
+
+        throw e;
+    }
 
     /**
      * On init, configures Octokit hooks.
@@ -89,21 +135,73 @@ export class GithubService implements OnInit {
      * @param owner - Github username
      */
     public getUserRepoNames(owner: string) {
-        if (!this._graphql) throw Error(noAuthMsg);
+        if (!this._graphql) throw Error(ERR_NO_AUTH);
 
         return this._graphql(
             `query($login: String!) {
                 user(login: $login) {
-                  repositories(first: 10, privacy: PUBLIC) {
-                    nodes {
-                      id,
-                      name,
-                      default_branch
+                    repositories(first: 10, privacy: PUBLIC) {
+                        nodes {
+                            id
+                            name
+                            default_branch
+                        }
                     }
-                  }
                 }
-              }`,
+            }
+            `,
             { login: owner }
         );
+    }
+
+    /**
+     * Queries Github's GraphQL API for all the files and directories in a repo.
+     * Top level only. Recursive requests are not supported by this method.
+     *
+     * @param repoId - Repository ID
+     * @param fetchObjects - Indicates if file data should be included
+     */
+    public async getTreeEntries(
+        repoId: string,
+        fetchObjects: boolean
+    ): Promise<TreeEntry[]> {
+        if (!this._graphql) throw Error(ERR_NO_AUTH);
+
+        const objectsQuery = `
+            object {
+                ... on Blob {
+                    text
+                    isBinary
+                }
+            }`;
+
+        try {
+            const res: TreeEntriesResponse = await this._graphql(
+                `query($id: ID!) {
+                    node(id: $id) {
+                        ... on Repository {
+                            object(expression: "HEAD:") {
+                                ... on Tree {
+                                    entries {
+                                        name
+                                        type
+                                        ${fetchObjects ? objectsQuery : ""}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }`,
+                { id: repoId }
+            );
+
+            if (res?.node?.object?.entries) {
+                return res.node.object.entries;
+            }
+        } catch (e) {
+            this._handleGraphqlError(e);
+        }
+
+        throw Error(ERR_GRAPHQL);
     }
 }
