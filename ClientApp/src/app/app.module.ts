@@ -22,6 +22,7 @@ import { NavMenuSeparatorComponent } from "./components/nav-menu-separator/nav-m
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { LogoComponent } from "./components/logo/logo.component";
 import { PageLinkToolComponent } from "./components/page-link-tool/page-link-tool.component";
+import { ReadyService } from "./services/ready/ready.service";
 
 @NgModule({
     declarations: [
@@ -47,7 +48,7 @@ import { PageLinkToolComponent } from "./components/page-link-tool/page-link-too
         AppRoutingModule,
         FontAwesomeModule,
     ],
-    providers: [AccountService, GithubService],
+    providers: [ReadyService, AccountService, GithubService],
     bootstrap: [AppComponent],
 })
 // eslint-disable-next-line jsdoc/require-jsdoc

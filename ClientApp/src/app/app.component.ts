@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AccountService } from "./services/account/account.service";
 import { GithubService } from "./services/github/github.service";
+import { ReadyService } from "./services/ready/ready.service";
 
 /**
  * The app's main component.
@@ -11,30 +12,29 @@ import { GithubService } from "./services/github/github.service";
     styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
+    /**
+     * App title.
+     */
     public title = "ClientApp";
-    public debug = "";
 
     /**
      * Constructs the AppComponent.
      */
     constructor(
-        private account: AccountService,
-        private github: GithubService
+        private _ready: ReadyService,
+        private _account: AccountService,
+        private _github: GithubService
     ) {}
 
     /**
      * On init, syncs the local user and Github API access details.
      */
-    public async ngOnInit(): Promise<void> {
-        await this.account.syncLocalUser();
-        if (this.account.isSignedIn()) {
-            await this.github.syncAccessToken();
-
-            this.debug = JSON.stringify(
-                await this.github.getUserRepoNames(this.account.getOwnName()),
-                null,
-                4
-            );
-        }
+    public ngOnInit(): void {
+        this._ready.await(async () => {
+            await this._account.syncLocalUser();
+            if (this._account.isSignedIn()) {
+                await this._github.syncAccessToken();
+            }
+        });
     }
 }
