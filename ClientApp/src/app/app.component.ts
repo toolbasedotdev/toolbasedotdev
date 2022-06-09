@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
     public ngOnInit(): void {
         this._ready.await(async () => {
             await this._account.syncLocalUser();
+
             if (this._account.isSignedIn()) {
                 await this._github.syncAccessToken();
             }

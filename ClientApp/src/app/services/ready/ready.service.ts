@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from "@angular/core";
+import { take } from "rxjs/operators";
 
 /**
  * Used as a one-stop shop to determine if all necessary services have
@@ -28,9 +29,20 @@ export class ReadyService {
     }
 
     /**
-     * Returns a promise that resolves when all services are ready.
+     * Returns a promise that resolves when all services are ready. If all
+     * services are ready, returns a promise that resolves immediately.
      */
-    public async toPromise(): Promise<void> {
-        return this.onReady.toPromise();
+    public toPromise(): Promise<void> {
+        if (this.isReady) {
+            return new Promise((resolve) => {
+                resolve();
+            });
+        }
+
+        return new Promise((resolve) => {
+            this.onReady.pipe(take(1)).subscribe(() => {
+                resolve();
+            });
+        });
     }
 }
