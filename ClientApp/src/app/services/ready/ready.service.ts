@@ -22,8 +22,8 @@ export class ReadyService {
      * Begins waiting on all services.
      * ! Called in AppComponent ONLY!
      */
-    public async await(promise: () => Promise<void>) {
-        await promise;
+    public async await(initFn: () => Promise<void>) {
+        await initFn();
         this.onReady.emit();
     }
 
