@@ -21,7 +21,6 @@ import { NavMenuItemComponent } from "./components/nav-menu-item/nav-menu-item.c
 import { NavMenuSeparatorComponent } from "./components/nav-menu-separator/nav-menu-separator.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { LogoComponent } from "./components/logo/logo.component";
-import { PageLinkToolComponent } from "./components/page-link-tool/page-link-tool.component";
 import { ReadyService } from "./services/ready/ready.service";
 
 @NgModule({
@@ -29,7 +28,6 @@ import { ReadyService } from "./services/ready/ready.service";
         AppComponent,
         PageHomeComponent,
         PageNotFoundComponent,
-
         BannerComponent,
         BannerSearchbarComponent,
         NavComponent,
@@ -37,15 +35,12 @@ import { ReadyService } from "./services/ready/ready.service";
         NavMenuItemComponent,
         NavMenuSeparatorComponent,
         LogoComponent,
-        PageLinkToolComponent,
     ],
     imports: [
+        AppRoutingModule,
         BrowserModule,
         HttpClientModule,
         FormsModule,
-        FontAwesomeModule,
-        BrowserModule,
-        AppRoutingModule,
         FontAwesomeModule,
     ],
     providers: [ReadyService, AccountService, GithubService],
