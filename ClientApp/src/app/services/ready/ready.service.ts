@@ -25,6 +25,7 @@ export class ReadyService {
      */
     public async await(initFn: () => Promise<void>) {
         await initFn();
+        this.isReady = true;
         this.onReady.emit();
     }
 
@@ -33,13 +34,11 @@ export class ReadyService {
      * services are ready, returns a promise that resolves immediately.
      */
     public toPromise(): Promise<void> {
-        if (this.isReady) {
-            return new Promise((resolve) => {
-                resolve();
-            });
-        }
-
         return new Promise((resolve) => {
+            if (this.isReady) {
+                resolve();
+            }
+
             this.onReady.pipe(take(1)).subscribe(() => {
                 resolve();
             });
