@@ -1,12 +1,12 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { PageSettingsComponent } from "./components/page-settings/page-settings.component";
 import { SubpageReposComponent } from "./components/subpage-repos/subpage-repos.component";
+import { SettingsComponent } from "./settings.component";
 
 const routes: Routes = [
     {
         path: "",
-        component: PageSettingsComponent,
+        component: SettingsComponent,
         children: [{ path: "repos", component: SubpageReposComponent }],
     },
 ];
