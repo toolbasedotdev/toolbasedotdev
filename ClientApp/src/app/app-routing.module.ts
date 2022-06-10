@@ -1,7 +1,12 @@
+/* eslint-disable jsdoc/require-jsdoc */
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { PageHomeComponent } from "./components/page-home/page-home.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+
+const modules = {
+    settings: "./modules/settings/settings.module",
+};
 
 const routes: Routes = [
     { path: "", component: PageHomeComponent },
@@ -12,13 +17,9 @@ const routes: Routes = [
     },
     {
         path: "settings",
-        /**
-         * Loads Settings module.
-         */
+        data: { auth: true },
         loadChildren: () =>
-            import("./modules/settings/settings.module").then(
-                (m) => m.SettingsModule
-            ),
+            import(modules.settings).then((m) => m.SettingsModule),
     },
     { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
