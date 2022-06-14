@@ -7,7 +7,7 @@ const routes: Routes = [
     {
         path: "",
         component: SettingsComponent,
-        children: [{ path: "repos", component: SubpageReposComponent }],
+        children: [{ path: "repositories", component: SubpageReposComponent }],
     },
 ];
 

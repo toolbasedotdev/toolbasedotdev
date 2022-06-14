@@ -1,1 +1,4 @@
-<p>section-list works!</p>
+<div *ngFor="let section of sections" role="listitem">
+    <fa-icon [icon]="section.icon"></fa-icon>
+    <span>{{ section.name }}</span>
+</div>
